@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { wedding } from '../../config/wedding'
-import WeddingIcon from './WeddingIcon.vue'
 import couplePhoto from '../../assets/images/H&A.jpeg'
 
 const date = new Date(wedding.date)
@@ -17,8 +16,6 @@ const sealYear = new Intl.DateTimeFormat('en-GB', { year: 'numeric', timeZone: w
       <div class="my-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs tracking-[0.1em] md:justify-start">
         <span>{{ wedding.weekday }}</span><span class="h-4 w-px bg-teal/30" aria-hidden="true"></span><time :datetime="wedding.date">{{ wedding.dateLabel }}</time>
       </div>
-      <a href="#rsvp" class="button button-primary">Celebrate with us <WeddingIcon name="arrow" :size="17" /></a>
-      <a href="#invitation" class="mt-6 flex min-h-11 items-center justify-center gap-2 text-xs text-muted md:justify-start">Discover the invitation <WeddingIcon name="down" :size="14" /></a>
     </div>
     <div class="hero-art relative mx-auto mb-10 w-full max-w-lg">
       <div class="hero-image-frame overflow-hidden bg-mist">

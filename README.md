@@ -6,6 +6,8 @@ Vue 3 Composition API, TypeScript, Vue Router, Vite 7, and Tailwind CSS 4. The i
 
 For permanent ucapan with live updates and Netlify deployment, follow [Supabase and Netlify setup](docs/supabase-netlify-setup.md). Each environment needs its publishable settings and database setup. The guest book loads near its section, applies live changes without re-fetching the whole list, and disconnects when away. Content-hashed static assets use browser caching to reduce repeat downloads.
 
+Each page load begins with a white envelope cover, teal fold lines, the couple's names, and a circular seal. Tap or click it, or focus it and press Enter/Space, to open the invitation. The top flap folds up and the bottom slides away to reveal the website directly underneath; reduced-motion preferences skip that animation. The page starts at the top with keyboard focus on the invitation. Run `npm.cmd run verify:envelope` to check the opening screen, responsive layout, keyboard and touch controls, and reduced-motion behavior without connecting to Supabase.
+
 ## Run locally on Windows
 
 Use Node.js **22.12+** (Node 22 LTS recommended). A verified portable copy is available in this workspace at `.tools/node`; it is ignored by Git. New VS Code integrated terminals add that folder to PATH automatically. Reopen an existing terminal, or enable it in the current PowerShell terminal:

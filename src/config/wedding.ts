@@ -27,7 +27,7 @@ export const wedding = {
     greeting: 'Assalamualaikum',
     message: 'Dengan penuh kesyukuran, kami menjemput anda ke majlis perkahwinan kami yang akan berlangsung pada 11 Disember 2026, di Kota Masai Johor',
     quote: 'Dan di antara tanda-tanda yang membuktikan kekuasaannya... dijadikanNya di antara kamu (suami isteri) perasaan kasih sayang dan belas kasihan.',
-    quoteAttribution: 'Quran · Ar-Rum 30:21',
+    quoteAttribution: ' · Ar-Rum 30:21 ·',
   },
   events: [
     { id: 'arrival', title: 'Kehadiran Tetamu & Pengantin & Jurunikah', time: '7:30 PM', startsAt: '19:30' },
@@ -46,6 +46,19 @@ export const wedding = {
     deadline: '30 November 2026',
     formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdd8ZgpwYWRtRDrX7WBDE8Ka8WrJxWWmeBkaHgtiiEd91kuSw/viewform?pli=1',
   },
+  contribution: {
+    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScUh0cAAAy35LJjTHvIKPLqoDwGXL5o1fkxXo71PfFvljkvzQ/viewform',
+  },
+  contacts: [
+    {
+      id: 'hazim', name: 'Hazim Muaz', role: 'Pengantin lelaki',
+      phone: '+60 11-7264 1574', email: 'hazimmuaz1574@gmail.com',
+    },
+    {
+      id: 'shafikah', name: 'Shafikah', role: 'Pengantin perempuan',
+      phone: '+60 11-1773 6417', email: 'pikaazman15@gmail.com',
+    },
+  ],
   gallery: [
     { id: 'garden', src: garden, alt: 'Placeholder illustration of an archway in an olive garden', caption: 'A little magic', isPlaceholder: true },
     { id: 'flowers', src: flowers, alt: 'Placeholder illustration of cream flowers in a ceramic vase', caption: 'The little things', isPlaceholder: true },

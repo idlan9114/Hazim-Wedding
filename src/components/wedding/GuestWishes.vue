@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useGuestWishes } from '../../composables/useGuestWishes'
+import { wedding } from '../../config/wedding'
 import WeddingIcon from './WeddingIcon.vue'
 
 const wishesSection = ref<HTMLElement>()
@@ -74,7 +75,15 @@ async function submit() {
 <template>
   <section ref="wishesSection" id="wishes" class="section-space border-y border-ink/10 bg-mist/30 py-10" aria-labelledby="wishes-title">
     <div class="page-shell">
-      <div class="mx-auto max-w-xl text-center"><p class="eyebrow mb-4">Words we will treasure</p><h2 id="wishes-title" class="section-title">A little love from you</h2><p id="wish-demo" class="mt-5 text-xs leading-7 text-muted">{{ live ? 'Leave a little love for the couple. Your name and message will be visible to other guests.' : 'Demo guest book. Example wishes are shown below. New wishes stay in memory on this page and disappear on reload; nothing is permanently saved or sent.' }}</p></div>
+      <div class="mx-auto max-w-xl text-center">
+        <p class="eyebrow mb-4">Words we will treasure</p>
+        <h2 id="wishes-title" class="section-title">A little love from you</h2>
+        <p id="wish-demo" class="mt-5 text-sm leading-7 text-muted">{{ live ? 'Leave a little love for the couple. Your name and message will be visible to other guests.' : 'Demo guest book. Example wishes are shown below. New wishes stay in memory on this page and disappear on reload; nothing is permanently saved or sent.' }}</p>
+        <p class="mt-3 text-sm leading-7 text-muted" lang="ms">
+          Sebarang sumbangan boleh diberikan
+          <a :href="wedding.contribution.formUrl" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center font-medium text-teal underline underline-offset-4 hover:text-teal-deep">di sini<span class="sr-only"> (dibuka dalam tab baharu)</span></a>.
+        </p>
+      </div>
       <div class="mx-auto mt-10 grid max-w-5xl items-start gap-8 lg:grid-cols-2">
         <form ref="form" class="min-w-0 border border-teal/20 bg-paper p-6 sm:p-8" novalidate aria-describedby="wish-demo" @submit.prevent="submit">
           <label for="wish-name" class="form-label">Your name <span aria-hidden="true">*</span></label><input id="wish-name" v-model="name" autocomplete="name" maxlength="80" required class="form-input" placeholder="Your name" :aria-invalid="!!nameError" :aria-describedby="nameError ? 'wish-name-error' : undefined" /><p v-if="nameError" id="wish-name-error" class="form-error">{{ nameError }}</p>

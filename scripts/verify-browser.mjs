@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { chromium } from 'playwright-core'
+import { openInvitation } from './helpers/open-invitation.mjs'
 
 const baseURL = process.env.VERIFY_URL || 'http://localhost:5173'
 const report = []
@@ -17,6 +18,7 @@ page.on('request', (request) => { if (request.method() === 'POST') browserErrors
 try {
   const response = await page.goto(baseURL)
   assert.equal(response?.status(), 200)
+  await openInvitation(page)
   await page.getByRole('heading', { level: 1 }).waitFor()
   await page.waitForFunction(() => [...document.images].filter((image) => image.loading !== 'lazy').every((image) => image.complete && image.naturalWidth > 0))
   add('Development server responds with a rendered Vue invitation')
@@ -75,6 +77,7 @@ try {
   })
   add('Two wish cards fit in the list and older wishes remain reachable by keyboard scrolling')
   await page.reload()
+  await openInvitation(page)
   await page.getByRole('heading', { level: 1 }).waitFor()
   assert.equal(await page.getByText('Temporary Demo Guest', { exact: true }).count(), 0)
   add('Guest wishes validate, render text safely, and disappear after reload')
@@ -88,6 +91,7 @@ try {
   add('Countdown ticks and reduced-motion settings disable smooth scrolling')
 
   await page.goto(`${baseURL}/a-nonexistent-route`)
+  await openInvitation(page)
   await page.waitForURL(`${baseURL}/`)
   add('Vue Router safely redirects unknown routes to the invitation')
 
@@ -129,6 +133,7 @@ try {
   await page.waitForFunction(() => getComputedStyle(document.body).getPropertyValue('--hmr-verification').trim() === '')
   await page.clock.install({ time: new Date('2026-12-11T19:29:58+08:00') })
   await page.reload()
+  await openInvitation(page)
   await page.clock.runFor(3000)
   assert.equal(await page.getByRole('heading', { name: 'Our forever has begun' }).isVisible(), true)
   assert.match(await page.getByRole('timer').innerText(), /00/)

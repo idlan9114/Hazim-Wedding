@@ -14,7 +14,8 @@
     "verify:browser": "node scripts/verify-browser.mjs",
     "verify:supabase": "node scripts/verify-supabase.mjs",
     "verify:delivery": "node scripts/verify-delivery.mjs",
-    "verify:motion": "node scripts/verify-motion.mjs"
+    "verify:motion": "node scripts/verify-motion.mjs",
+    "verify:envelope": "node scripts/verify-envelope.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.0",

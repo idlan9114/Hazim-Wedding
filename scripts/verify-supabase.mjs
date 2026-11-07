@@ -4,6 +4,7 @@ import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
 import { chromium } from 'playwright-core'
+import { openInvitation } from './helpers/open-invitation.mjs'
 
 const origin = 'http://localhost:5193'
 const supabaseOrigin = 'https://guestbook-verification.supabase.co'
@@ -117,6 +118,7 @@ try {
 
   const first = await context.newPage()
   await first.goto(origin)
+  await openInvitation(first)
   await first.getByRole('heading', { level: 1 }).waitFor()
   assert.equal(readCount, 0)
   assert.equal(sockets.size, 0)
@@ -145,6 +147,7 @@ try {
 
   const second = await context.newPage()
   await second.goto(origin)
+  await openInvitation(second)
   await second.locator('#wishes').scrollIntoViewIfNeeded()
   await second.getByText('Saved Guest 1', { exact: true }).waitFor()
   await waitUntil(() => sockets.size === 2, 'Both guest books should have live connections')
@@ -159,6 +162,7 @@ try {
   assert.equal(await first.locator('.wish-card').filter({ hasText: 'Persistent Guest' }).count(), 1)
   assert.match(await first.locator('.wish-card').first().innerText(), /<script>/)
   await first.reload()
+  await openInvitation(first)
   await first.locator('#wishes').scrollIntoViewIfNeeded()
   await first.getByText('Persistent Guest', { exact: true }).waitFor()
   console.log('PASS Saved wishes survive reload and appear live in a second tab without duplicates')
@@ -252,6 +256,7 @@ try {
     })
   })
   await blocked.goto(origin)
+  await openInvitation(blocked)
   const beforeBlockedRead = readCount
   await blocked.locator('#wishes').scrollIntoViewIfNeeded()
   await blocked.getByText('Live updates are temporarily unavailable. Refresh the wishes to see the latest messages.', { exact: true }).waitFor()

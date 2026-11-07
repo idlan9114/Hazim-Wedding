@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
 import { chromium } from 'playwright-core'
+import { openInvitation } from './helpers/open-invitation.mjs'
 
 const origin = 'http://localhost:5195'
 const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', '--configLoader', 'runner', '--port', '5195', '--strictPort'], {
@@ -27,16 +28,15 @@ try {
   page.on('pageerror', error => errors.push(error.message))
   page.on('console', message => { if (message.type() === 'error' || message.type() === 'warning') errors.push(message.text()) })
   await page.goto(origin)
+  await openInvitation(page)
   await page.getByRole('heading', { level: 1 }).waitFor()
-  assert.equal(await page.locator('h1').evaluate(node => getComputedStyle(node).animationName), 'invitation-enter')
-  assert.equal(await page.locator('.hero-date-seal').evaluate(node => getComputedStyle(node).animationName), 'invitation-seal')
-  assert.equal(await page.locator('h1').evaluate(node => getComputedStyle(node).animationDuration), '1.4s')
+  assert.equal(await page.locator('h1').evaluate(node => getComputedStyle(node).animationName), 'none')
+  assert.equal(await page.locator('.hero-date-seal').evaluate(node => getComputedStyle(node).animationName), 'none')
   await page.waitForFunction(() => ['.hero-art', '.hero-date-seal', 'h1'].every(selector => document.querySelector(selector).getAnimations().every(animation => animation.playState === 'finished')))
   assert.equal(await page.locator('.hero-art').evaluate(node => getComputedStyle(node).opacity), '1')
-  assert.notEqual(await page.locator('.hero-date-seal').evaluate(node => getComputedStyle(node).transform), 'none')
   await page.screenshot({ path: '.verification/motion-hero-390.png' })
   assert.equal(await page.locator('footer').evaluate(node => node.classList.contains('reveal-pending')), true)
-  console.log('PASS Staggered cover and date-badge entrances finish and preserve the existing layout')
+  console.log('PASS The hero and date badge are immediately visible as the envelope opens')
 
   const events = page.locator('#celebration')
   const firstCard = events.locator('.event-card').first()
@@ -103,12 +103,14 @@ try {
   const reduced = await browser.newContext({ reducedMotion: 'reduce' })
   const reducedPage = await reduced.newPage()
   await reducedPage.goto(origin)
+  await openInvitation(reducedPage)
   await reducedPage.getByRole('heading', { level: 1 }).waitFor()
   assert.equal(await reducedPage.locator('.reveal-pending').count(), 0)
   assert.equal(await reducedPage.locator('.hero-art').evaluate(node => getComputedStyle(node).animationName), 'none')
   const fallbackPage = await context.newPage()
   await fallbackPage.addInitScript(() => { delete window.IntersectionObserver })
   await fallbackPage.goto(origin)
+  await openInvitation(fallbackPage)
   await fallbackPage.getByRole('heading', { level: 1 }).waitFor()
   assert.equal(await fallbackPage.locator('.reveal-pending').count(), 0)
   console.log('PASS Reduced-motion and missing-observer fallbacks keep every section readable')

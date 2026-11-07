@@ -5,6 +5,7 @@ import { readFile, writeFile } from 'node:fs/promises'
 import { extname, resolve, sep } from 'node:path'
 import { gzipSync } from 'node:zlib'
 import { chromium } from 'playwright-core'
+import { openInvitation } from './helpers/open-invitation.mjs'
 
 const directory = resolve('dist')
 const html = await readFile(resolve(directory, 'index.html'), 'utf8')
@@ -46,12 +47,14 @@ try {
   page.on('pageerror', error => exceptions.push(error.message))
   page.on('request', request => { if (new URL(request.url()).hostname.endsWith('.supabase.co')) databaseRequests++ })
   await page.goto('http://localhost:5194/?visit=first')
+  await openInvitation(page)
   await page.getByRole('heading', { level: 1 }).waitFor()
   await page.locator('.hero-image-frame img').evaluate(image => image.decode())
   const firstAssets = new Map([...hits].filter(([path]) => path.startsWith('/assets/')))
   assert.equal([...firstAssets.keys()].filter(path => path.endsWith('.js')).length, 1, 'The guest book SDK should not download on opening the invitation')
   assert.equal(databaseRequests, 0)
   await page.goto('http://localhost:5194/?visit=returning')
+  await openInvitation(page)
   await page.getByRole('heading', { level: 1 }).waitFor()
   await page.locator('.hero-image-frame img').evaluate(image => image.decode())
   for (const [path, count] of firstAssets) assert.equal(hits.get(path), count, 'Returning visitors should reuse the cached asset: ' + path)

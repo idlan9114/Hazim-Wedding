@@ -28,6 +28,14 @@ export interface GuestWish {
   isExample: boolean
 }
 
+export interface WeddingContact {
+  id: string
+  name: string
+  role: string
+  phone: string
+  email: string
+}
+
 export interface WeddingConfig {
   isDemo: boolean
   groom: Person
@@ -41,6 +49,8 @@ export interface WeddingConfig {
   events: WeddingEvent[]
   venue: { name: string; address: string; mapUrl: string; note: string }
   rsvp: { deadline: string; formUrl: string }
+  contribution: { formUrl: string }
+  contacts: WeddingContact[]
   gallery: GalleryPhoto[]
   wishes: GuestWish[]
   music: { enabled: boolean; src: string; title: string }

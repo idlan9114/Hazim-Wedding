@@ -56,7 +56,7 @@ a { text-underline-offset: 4px; }
 .form-error { margin-top: 0.5rem; color: #953b30; font-size: 12px; line-height: 1.7; }
 .form-status { color: var(--color-teal); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
 .wish-card { overflow-wrap: anywhere; }
-.wishes-list { overflow-y: auto; overscroll-behavior-y: contain; scrollbar-width: thin; scrollbar-color: var(--color-teal) transparent; scrollbar-gutter: stable; }
+.wishes-list { overflow-y: auto; overscroll-behavior-y: auto; scrollbar-width: thin; scrollbar-color: var(--color-teal) transparent; scrollbar-gutter: stable; }
 .photo-dialog { position: fixed; inset: 0; margin: auto; width: min(90vw, 520px); max-height: 90dvh; }
 .photo-dialog::backdrop { background: color-mix(in srgb, var(--color-teal-deep) 85%, transparent); }
 .lightbox-image { width: 100%; max-height: 68dvh; }
