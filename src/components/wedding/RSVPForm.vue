@@ -11,7 +11,10 @@ import WeddingIcon from './WeddingIcon.vue'
       </div>
       <p class="eyebrow mb-4">Pengesahan kehadiran</p>
       <h2 id="rsvp-title" class="section-title">Sudi hadir meraikan kami?</h2>
-      <p class="mx-auto mt-5 max-w-md text-sm leading-8 text-muted">Kami berbesar hati menjemput anda meraikan hari bahagia kami. Sila sahkan kehadiran anda sebelum <strong class="font-medium text-ink">-{{ wedding.rsvp.deadline }}-</strong>.</p>
+      <p class="mx-auto mt-5 max-w-md text-sm leading-8 text-muted">
+        Kami berbesar hati menjemput anda meraikan hari bahagia kami. Sila sahkan kehadiran anda sebelum
+        <strong class="block font-medium text-ink">- {{ wedding.rsvp.deadline }} -.</strong>
+      </p>
       <div class="mx-auto mt-8 flex max-w-sm flex-col items-center gap-3">
         <a :href="wedding.rsvp.formUrl" target="_blank" rel="noopener noreferrer" class="button button-primary w-full sm:w-auto" aria-describedby="rsvp-link-note">
           Sahkan kehadiran <WeddingIcon name="arrow" :size="17" />
