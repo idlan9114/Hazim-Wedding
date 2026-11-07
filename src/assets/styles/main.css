@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f7f4ec;
+  --color-cream: #eee7dc;
+  --color-ink: #253b3e;
+  --color-teal: #263f43;
+  --color-teal-deep: #1b3034;
+  --color-muted: #586566;
+  --color-mist: #dce6e4;
+  --font-sans: "Segoe UI", Arial, sans-serif;
+  --font-display: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+}
+
+@layer base {
+:root { font-family: var(--font-sans); color: var(--color-ink); background: var(--color-teal); font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; padding: clamp(0.5rem, 2vw, 2rem); }
+#app { width: min(100%, 1280px); margin-inline: auto; background: var(--color-paper); box-shadow: 0 16px 64px color-mix(in srgb, var(--color-teal-deep) 28%, transparent); }
+img, svg { max-width: 100%; }
+img { display: block; }
+button, input, select, textarea { font: inherit; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button, a { touch-action: manipulation; }
+button { cursor: pointer; }
+button:disabled { cursor: wait; opacity: 0.65; }
+a { text-underline-offset: 4px; }
+:focus-visible { outline: 2px solid var(--color-teal); outline-offset: 5px; }
+::selection { color: var(--color-paper); background: var(--color-teal); }
+[id] { scroll-margin-top: 1.5rem; }
+}
+
+@layer components {
+.page-shell { width: min(100% - 2.5rem, 1120px); margin-inline: auto; }
+.section-space { padding-bottom: 4.5rem; }
+.section-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; line-height: 1.18; letter-spacing: -0.035em; text-wrap: balance; }
+.eyebrow { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; line-height: 1.8; }
+.button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 1.5rem; padding: 0.85rem 1.5rem; border: 1px solid transparent; border-radius: 2px; font-size: 12px; line-height: 1.5; text-align: center; transition: background-color 160ms ease, border-color 160ms ease; }
+.button-primary { background: var(--color-teal); color: var(--color-paper); }
+.button-primary:hover { background: var(--color-teal-deep); }
+.button-outline { border-color: color-mix(in srgb, var(--color-teal) 40%, transparent); color: var(--color-teal); }
+.button-outline:hover { background: color-mix(in srgb, var(--color-teal) 5%, transparent); border-color: var(--color-teal); }
+.icon-button { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 50%; }
+.hero-names { font-size: clamp(4.5rem, 13vw, 7.5rem); }
+.hero-image-frame { aspect-ratio: 1080 / 719; border-radius: 50% 50% 2px 2px; }
+.hero-date-seal { right: -8px; bottom: -40px; width: 106px; height: 106px; transform: rotate(8deg); }
+.event-card { border-radius: 2px 2px 35px 2px; }
+.gallery-trigger { border-radius: 45% 45% 2px 2px; }
+.gallery-image { aspect-ratio: 4 / 5; }
+.countdown-number { font-size: clamp(2.15rem, 7vw, 4rem); }
+.form-label { display: block; margin-bottom: 0.65rem; font-size: 12px; font-weight: 500; line-height: 1.6; }
+.form-input { display: block; width: 100%; min-width: 0; min-height: 48px; border: 1px solid color-mix(in srgb, var(--color-teal) 40%, transparent); border-radius: 2px; background: var(--color-paper); padding: 0.8rem 0.85rem; font-size: 16px; line-height: 1.5; color: var(--color-ink); }
+.form-input::placeholder { color: var(--color-muted); font-size: 13px; opacity: 1; }
+.form-input[aria-invalid='true'] { border-color: #a3392c; }
+.form-error { margin-top: 0.5rem; color: #953b30; font-size: 12px; line-height: 1.7; }
+.form-status { color: var(--color-teal); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+.wish-card { overflow-wrap: anywhere; }
+.wishes-list { overflow-y: auto; overscroll-behavior-y: contain; scrollbar-width: thin; scrollbar-color: var(--color-teal) transparent; scrollbar-gutter: stable; }
+.photo-dialog { position: fixed; inset: 0; margin: auto; width: min(90vw, 520px); max-height: 90dvh; }
+.photo-dialog::backdrop { background: color-mix(in srgb, var(--color-teal-deep) 85%, transparent); }
+.lightbox-image { width: 100%; max-height: 68dvh; }
+.dialog-open { overflow: hidden; }
+.skip-link { position: fixed; top: 0.5rem; left: 0.5rem; z-index: 100; transform: translateY(-150%); background: var(--color-teal); padding: 1rem; color: var(--color-paper); }
+.skip-link:focus { transform: translateY(0); }
+}

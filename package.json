@@ -1,0 +1,34 @@
+{
+  "name": "hazim-wedding-invitation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run type-check && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "type-check": "vue-tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
+    "verify:browser": "node scripts/verify-browser.mjs",
+    "verify:supabase": "node scripts/verify-supabase.mjs",
+    "verify:delivery": "node scripts/verify-delivery.mjs",
+    "verify:motion": "node scripts/verify-motion.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.0",
+    "@types/node": "^22.0.0",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "playwright-core": "^1.56.0",
+    "tailwindcss": "^4.1.0",
+    "typescript": "~5.9.0",
+    "vite": "^7.0.0",
+    "vue-tsc": "^3.1.0"
+  }
+}
